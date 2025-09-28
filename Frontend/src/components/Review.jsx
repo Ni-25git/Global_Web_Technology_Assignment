@@ -329,7 +329,7 @@ function ReviewComponent() {
 
   useEffect(() => {
     axios
-      .get(`https://global-web-technology-assignment.onrender.com/reviews`)
+      .get(`api/reviews`)
       .then((res) => {
         // If backend returns { reviews: [...] }
         const data = Array.isArray(res.data.reviews)

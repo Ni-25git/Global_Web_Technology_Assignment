@@ -132,7 +132,7 @@ const Collection = () => {
   const responsive = useResponsiveStyles();
 
   useEffect(() => {
-    axios.get(`https://global-web-technology-assignment.onrender.com/collections`)
+    axios.get(`api/collections`)
       .then(res => {
         if (Array.isArray(res.data.collections)) {
           setProducts(res.data.collections);

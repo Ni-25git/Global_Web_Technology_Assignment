@@ -132,7 +132,7 @@ export default function Room() {
 
   useEffect(() => {
     axios
-      .get(`https://global-web-technology-assignment.onrender.com/shopbyroom`)
+      .get(`api/shopbyroom`)
       .then((res) => {
         const data = Array.isArray(res.data.rooms)
           ? res.data.rooms

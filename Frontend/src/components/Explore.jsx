@@ -177,7 +177,7 @@ export default function Explore() {
 
   useEffect(() => {
     axios
-      .get(`https://global-web-technology-assignment.onrender.com/explore`)
+      .get(`api/explore`)
       .then((res) => {
         const data = Array.isArray(res.data.explore)
           ? res.data.explore
