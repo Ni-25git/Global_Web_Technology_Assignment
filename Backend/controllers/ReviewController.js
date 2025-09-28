@@ -1,0 +1,15 @@
+const ReviewModel = require("../models/ReviewModel")
+
+
+
+exports.getReviews = async (req,res)=>{
+    try {
+        const reviews = await ReviewModel.find();
+        if(reviews.length===0){
+            return res.status(404).json({message:"No reviews found"});
+        }
+        return res.status(200).json({reviews});
+    } catch (error) {
+        return res.status(500).json({message:"Internal server error",error:error.message});
+    }
+};
