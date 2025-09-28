@@ -99,7 +99,7 @@ export default function Categories() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:4500/shopbycategories")
+      .get(`https://global-web-technology-assignment.onrender.com/shopbycategories`)
       .then((res) => {
         const data = Array.isArray(res.data.categories)
           ? res.data.categories

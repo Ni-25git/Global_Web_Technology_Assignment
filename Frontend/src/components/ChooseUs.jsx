@@ -105,7 +105,7 @@ export default function ChooseUs() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:4500/chooseus")
+      .get(`https://global-web-technology-assignment.onrender.com/chooseus`)
       .then((res) => {
         if (Array.isArray(res.data.chooseUs)) {
           setFeatures(res.data.chooseUs);

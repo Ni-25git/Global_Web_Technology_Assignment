@@ -177,6 +177,32 @@ const bottomQuoteStyle = {
   textShadow: "0 2px 8px #000a"
 };
 
+// Simple ErrorBoundary class
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+  componentDidCatch(error, info) {
+    // Optionally log error
+  }
+  render() {
+    if (this.state.hasError) {
+      return (
+        <section style={{ ...sectionStyle, justifyContent: "center", alignItems: "center" }}>
+          <div style={{ color: "#7a4a2f", fontFamily: FONT_FAMILY, fontSize: 24, textAlign: "center" }}>
+            Sorry, something went wrong while loading reviews.
+          </div>
+        </section>
+      );
+    }
+    return this.props.children;
+  }
+}
+
 function Stars() {
   return (
     <span style={starsStyle}>
@@ -198,7 +224,7 @@ function useWindowWidth() {
   return width;
 }
 
-export default function Review() {
+function ReviewComponent() {
   const [reviews, setReviews] = useState([]);
   const [active, setActive] = useState(1);
   const width = useWindowWidth();
@@ -303,7 +329,7 @@ export default function Review() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:4500/reviews")
+      .get(`https://global-web-technology-assignment.onrender.com/reviews`)
       .then((res) => {
         // If backend returns { reviews: [...] }
         const data = Array.isArray(res.data.reviews)
@@ -381,5 +407,14 @@ export default function Review() {
         &quot;THE BEST ROOMS HAVE SOMETHING TO SAY ABOUT THE PEOPLE WHO LIVE IN THEM.&quot;
       </div>
     </section>
+  );
+}
+
+// Export Review wrapped in ErrorBoundary
+export default function Review(props) {
+  return (
+    <ErrorBoundary>
+      <ReviewComponent {...props} />
+    </ErrorBoundary>
   );
 }
